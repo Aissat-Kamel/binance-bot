@@ -18,7 +18,7 @@ for ticker in tickers:
     try:
         df = get_klines(pair = ticker, interval = interval, depth = depth)
         for i in ema_used:
-            df["EMA_"+str(i)] = ta.EMA(df["Close"], timeperiod = i)
+            df["EMA_"+str(i)] = ta.EMA(df["Close"], timeperiod = i).fillna(0)
         engulfing = ta.CDLENGULFING(df["Open"], df["High"], df["Low"], df["Close"])
         last_index = find_engulging(series = engulfing)
 
